@@ -314,6 +314,64 @@
       }
     }
     
+    /* Button Microinteractions */
+    .micro-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Ripple Effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple-animation 0.6s ease-out;
+      pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    /* Shine Effect */
+    .shine-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .shine-effect::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .shine-effect:hover::before {
+      left: 100%;
+    }
+    
+    /* Pulse Animation */
+    .pulse-btn {
+      animation: pulse-effect 2s infinite;
+    }
+    
+    @keyframes pulse-effect {
+      0%, 100% {
+        box-shadow: 0 8px 24px rgba(203, 104, 45, 0.3);
+      }
+      50% {
+        box-shadow: 0 8px 32px rgba(203, 104, 45, 0.5);
+      }
+    }
+    
     .whatsapp-float {
       position: fixed;
       width: 60px;
@@ -524,7 +582,7 @@
                 <p style="font-size: ${baseSize * 1.25}px; color: rgba(255, 255, 255, 0.92); margin-bottom: 40px; font-weight: 300; line-height: 1.6; letter-spacing: 0.3px;">
                   ${tagline}
                 </p>
-                <a href="#contato" style="background: linear-gradient(135deg, ${primaryColor} 0%, #a85424 100%); color: white; font-size: ${baseSize}px; padding: 18px 42px; border-radius: 6px; display: inline-block; font-weight: 600; transition: all 0.4s; box-shadow: 0 8px 24px rgba(203, 104, 45, 0.3); letter-spacing: 0.5px; text-transform: uppercase; font-size: ${baseSize * 0.85}px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 32px rgba(203, 104, 45, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(203, 104, 45, 0.3)'">
+                <a href="#contato" class="micro-btn shine-effect" style="background: linear-gradient(135deg, ${primaryColor} 0%, #a85424 100%); color: white; font-size: ${baseSize}px; padding: 18px 42px; border-radius: 6px; display: inline-block; font-weight: 600; transition: all 0.4s; box-shadow: 0 8px 24px rgba(203, 104, 45, 0.3); letter-spacing: 0.5px; text-transform: uppercase; font-size: ${baseSize * 0.85}px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 32px rgba(203, 104, 45, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(203, 104, 45, 0.3)'" onclick="createRipple(event)">
                   Agende uma Consulta
                 </a>
               </div>
@@ -742,7 +800,7 @@
                     <input type="text" placeholder="Seu nome" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
                     <input type="email" placeholder="Seu e-mail" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
                     <textarea rows="4" placeholder="Sua mensagem" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px; resize: vertical;"></textarea>
-                    <button type="button" style="margin-top: 4px; background: linear-gradient(135deg, ${primaryColor} 0%, #a85424 100%); color: white; font-weight: 700; letter-spacing: 0.4px; padding: 12px 18px; border-radius: 6px; border: none; font-size: ${baseSize}px; cursor: pointer; box-shadow: 0 10px 24px rgba(203, 104, 45, 0.35);">Enviar Mensagem</button>
+                    <button type="button" class="micro-btn shine-effect" style="margin-top: 4px; background: linear-gradient(135deg, ${primaryColor} 0%, #a85424 100%); color: white; font-weight: 700; letter-spacing: 0.4px; padding: 12px 18px; border-radius: 6px; border: none; font-size: ${baseSize}px; cursor: pointer; box-shadow: 0 10px 24px rgba(203, 104, 45, 0.35); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 14px 28px rgba(203, 104, 45, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 24px rgba(203, 104, 45, 0.35)'" onclick="createRipple(event)">Enviar Mensagem</button>
                   </form>
                 </div>
               </div>
@@ -949,26 +1007,36 @@
       onConfigChange(defaultConfig);
     }
     
-    // Word by word reveal animation
-    function animateHeroTitle() {
-      const heroTitle = document.getElementById('hero-title');
-      if (!heroTitle) return;
+    // Button Ripple Effect
+    function createRipple(event) {
+      const button = event.currentTarget;
+      const ripple = document.createElement('span');
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = event.clientX - rect.left - size / 2;
+      const y = event.clientY - rect.top - size / 2;
       
-      const text = heroTitle.textContent.trim();
-      const words = text.split(' ');
-      heroTitle.innerHTML = '';
+      ripple.classList.add('ripple');
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
       
-      words.forEach((word, index) => {
-        const span = document.createElement('span');
-        span.className = 'word-reveal';
-        span.style.animationDelay = `${index * 0.15}s`;
-        span.textContent = word + ' ';
-        heroTitle.appendChild(span);
-      });
+      button.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
     }
     
-    // Executar animação após o DOM carregar
-    setTimeout(animateHeroTitle, 100);
+    // Attach ripple function to all micro buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.micro-btn');
+      buttons.forEach(btn => {
+        if (btn.onclick === null) {
+          btn.onclick = createRipple;
+        }
+      });
+    });
   </script>
+  
+  <script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b6ae54ba309f623',t:'MTc2NzE5NTgzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
