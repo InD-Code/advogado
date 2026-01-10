@@ -284,26 +284,34 @@
     }
     
     .flip-card-back h4 {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      opacity: 0.9;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      text-transform: none;
+      margin-bottom: 0;
+      opacity: 1;
+      line-height: 1.8;
+      text-align: justify;
+      font-family: 'Lato', sans-serif;
     }
     
-    .flip-card-back p {
-      font-size: 13px;
-      line-height: 1.7;
-      font-weight: 300;
-      opacity: 0.95;
-      margin-bottom: 16px;
+    /* Word Reveal Animation */
+    .word-reveal {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeInWord 0.8s ease-out forwards;
+      margin-right: 12px;
     }
     
-    .flip-card-back p strong {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 8px;
+    @keyframes fadeInWord {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .whatsapp-float {
@@ -510,7 +518,7 @@
             <div class="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <div class="accent-line" style="margin-left: 0; margin-bottom: 32px;"></div>
-                <h1 class="font-serif" style="font-size: ${baseSize * 3.5}px; color: white; line-height: 1.15; margin-bottom: 28px; font-weight: 700; letter-spacing: -0.5px;">
+                <h1 id="hero-title" class="font-serif" style="font-size: ${baseSize * 3.5}px; color: white; line-height: 1.15; margin-bottom: 28px; font-weight: 700; letter-spacing: -0.5px;">
                   ${officeName}
                 </h1>
                 <p style="font-size: ${baseSize * 1.25}px; color: rgba(255, 255, 255, 0.92); margin-bottom: 40px; font-weight: 300; line-height: 1.6; letter-spacing: 0.3px;">
@@ -526,31 +534,6 @@
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Statistics Section -->
-        <section style="background: linear-gradient(135deg, #1a1614 0%, #2d2521 100%); padding: 80px 24px; position: relative; overflow: hidden;">
-          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"1\" height=\"1\" fill=\"%23CB682D\" opacity=\"0.05\"/></svg></div>
-          <div class="max-w-7xl mx-auto" style="position: relative; z-index: 1;">
-            <div class="grid md:grid-cols-4 gap-8">
-              <div class="scroll-reveal stats-container" style="text-align: center;">
-                <span class="counter-number" data-target="500">0</span>
-                <span class="counter-label">Casos Resolvidos</span>
-              </div>
-              <div class="scroll-reveal stats-container" style="text-align: center;">
-                <span class="counter-number" data-target="25">0</span>
-                <span class="counter-label">Anos de Experiência</span>
-              </div>
-              <div class="scroll-reveal stats-container" style="text-align: center;">
-                <span class="counter-number" data-target="98">0</span>
-                <span class="counter-label">% Taxa de Sucesso</span>
-              </div>
-              <div class="scroll-reveal stats-container" style="text-align: center;">
-                <span class="counter-number" data-target="1200">0</span>
-                <span class="counter-label">Clientes Satisfeitos</span>
               </div>
             </div>
           </div>
@@ -582,8 +565,7 @@
                     <p style="font-size: ${baseSize}px; color: ${primaryColor}; font-weight: 600; letter-spacing: 0.5px;">OAB/PE nº 17.510</p>
                   </div>
                   <div class="flip-card-back">
-                    <h4>Advogado, inscrito na OAB/PE nº 17.510, pós-graduado em Direito Processual Civil pela Universidade Federal de Pernambuco, conta com 26 anos de experiência no Direito do Consumidor, agora atuante também nos serviços jurídicos extrajudiciais (aqueles que não precisam do Judiciário, ou precisam minimamente), principalmente Regularização de Imóveis extrajudicial. A valorização do cliente e a confiabilidade são as principais características do seu trabalho. Advocacia e confiança andam de mãos dadas!</h4>
-                    
+                    <h4>Advogado inscrito na OAB/PE nº 17.510, pós-graduado em Direito Processual Civil pela Universidade Federal de Pernambuco. Com 26 anos de experiência no Direito do Consumidor, atua também nos serviços jurídicos extrajudiciais, principalmente Regularização de Imóveis. A valorização do cliente e a confiabilidade são as principais características do seu trabalho. <em>Advocacia e confiança andam de mãos dadas!</em></h4>
                   </div>
                 </div>
               </div>
@@ -601,10 +583,7 @@
                     <p style="font-size: ${baseSize}px; color: ${primaryColor}; font-weight: 600; letter-spacing: 0.5px;">OAB/PE nº 18.867</p>
                   </div>
                   <div class="flip-card-back">
-                    <h4>Advogada, inscrita na OAB/PE nº 18.867, pós-graduada em Direito do Trabalho pela Universidade Federal de Pernambuco, com 25 anos de atuação na área de Direito Bancário e Consumidor, e agora também nos serviços jurídicos extrajudiciais (aqueles que não precisam do Judiciário, ou precisam minimamente), principalmente Divórcio extrajudicial. Tem na excelência no atendimento o principal pilar da Advocacia e a mais importante forma de valorização do cliente.
-
-</h4>
-                    
+                    <h4>Advogada inscrita na OAB/PE nº 18.867, pós-graduada em Direito do Trabalho pela Universidade Federal de Pernambuco. Com 25 anos de atuação em Direito Bancário e Consumidor, atua também nos serviços jurídicos extrajudiciais, principalmente Divórcio extrajudicial. Tem na excelência no atendimento o principal pilar da Advocacia e a mais importante forma de valorização do cliente.</h4>
                   </div>
                 </div>
               </div>
@@ -969,6 +948,27 @@
     } else {
       onConfigChange(defaultConfig);
     }
+    
+    // Word by word reveal animation
+    function animateHeroTitle() {
+      const heroTitle = document.getElementById('hero-title');
+      if (!heroTitle) return;
+      
+      const text = heroTitle.textContent.trim();
+      const words = text.split(' ');
+      heroTitle.innerHTML = '';
+      
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'word-reveal';
+        span.style.animationDelay = `${index * 0.15}s`;
+        span.textContent = word + ' ';
+        heroTitle.appendChild(span);
+      });
+    }
+    
+    // Executar animação após o DOM carregar
+    setTimeout(animateHeroTitle, 100);
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b6ae54ba309f623',t:'MTc2NzE5NTgzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
