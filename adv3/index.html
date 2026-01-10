@@ -1006,6 +1006,24 @@
     } else {
       onConfigChange(defaultConfig);
     }
+
+    // Word by word reveal animation
+    function animateHeroTitle() {
+      const heroTitle = document.getElementById('hero-title');
+      if (!heroTitle) return;
+
+      const text = heroTitle.textContent.trim();
+      const words = text.split(/\s+/);
+      heroTitle.innerHTML = '';
+
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'word-reveal';
+        span.style.animationDelay = `${index * 0.15}s`;
+        span.textContent = word + ' ';
+        heroTitle.appendChild(span);
+      });
+    }
     
     // Button Ripple Effect
     function createRipple(event) {
@@ -1028,6 +1046,7 @@
     
     // Attach ripple function to all micro buttons
     document.addEventListener('DOMContentLoaded', () => {
+      animateHeroTitle();
       const buttons = document.querySelectorAll('.micro-btn');
       buttons.forEach(btn => {
         if (!btn.dataset.rippleBound) {
