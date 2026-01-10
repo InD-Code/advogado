@@ -205,6 +205,38 @@
       transform: scale(1);
     }
     
+    /* Counter Animation Styles */
+    .counter-number {
+      font-size: 56px;
+      font-weight: 700;
+      color: #CB682D;
+      line-height: 1;
+      font-family: 'Cormorant Garamond', serif;
+      display: block;
+      margin-bottom: 12px;
+    }
+    
+    .counter-label {
+      font-size: 16px;
+      font-weight: 400;
+      color: #6C605E;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .stats-container {
+      background: linear-gradient(135deg, #f9f7f6 0%, #ffffff 100%);
+      border-radius: 16px;
+      padding: 48px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      transition: all 0.4s ease;
+    }
+    
+    .stats-container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(203, 104, 45, 0.15);
+    }
+    
     .whatsapp-float {
       position: fixed;
       width: 60px;
@@ -425,6 +457,31 @@
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section style="background: linear-gradient(135deg, #1a1614 0%, #2d2521 100%); padding: 80px 24px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"1\" height=\"1\" fill=\"%23CB682D\" opacity=\"0.05\"/></svg>'); "></div>
+          <div class="max-w-7xl mx-auto" style="position: relative; z-index: 1;">
+            <div class="grid md:grid-cols-4 gap-8">
+              <div class="scroll-reveal stats-container" style="text-align: center;">
+                <span class="counter-number" data-target="500">0</span>
+                <span class="counter-label">Casos Resolvidos</span>
+              </div>
+              <div class="scroll-reveal stats-container" style="text-align: center;">
+                <span class="counter-number" data-target="25">0</span>
+                <span class="counter-label">Anos de Experiência</span>
+              </div>
+              <div class="scroll-reveal stats-container" style="text-align: center;">
+                <span class="counter-number" data-target="98">0</span>
+                <span class="counter-label">% Taxa de Sucesso</span>
+              </div>
+              <div class="scroll-reveal stats-container" style="text-align: center;">
+                <span class="counter-number" data-target="1200">0</span>
+                <span class="counter-label">Clientes Satisfeitos</span>
               </div>
             </div>
           </div>
@@ -702,12 +759,39 @@
         </a>
       `;
       
+      // Counter Animation Function
+      function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000; // 2 segundos
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            element.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = target;
+          }
+        };
+        
+        updateCounter();
+      }
+      
       // Scroll Reveal - Intersection Observer
       setTimeout(() => {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('active');
+              
+              // Animar contadores quando aparecerem
+              const counter = entry.target.querySelector('.counter-number');
+              if (counter && !counter.classList.contains('animated')) {
+                counter.classList.add('animated');
+                setTimeout(() => animateCounter(counter), 300);
+              }
             }
           });
         }, {
