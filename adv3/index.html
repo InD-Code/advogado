@@ -588,7 +588,7 @@
               </div>
               <div style="width: 100%; height: 450px;">
                 <div class="video-placeholder">
-                  <video src="img/video%20adv.mp4" controls playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; background: #000;">
+                  <video id="hero-video" src="img/video%20adv.mp4" controls playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; background: #000;">
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
                 </div>
@@ -634,7 +634,7 @@
                   <div class="flip-card-front" style="background-color: ${accentColor};">
                     <div style="width: 220px; height: 220px; margin: 0 auto 28px;">
                       <div class="photo-placeholder">
-                        <span style="font-weight: 600; letter-spacing: 1px;">FOTO</span>
+                        <img src="img/advogada.png" alt="Claudiana Nery de Almeida Pimentel" style="width: 100%; height: 100%; object-fit: cover;" />
                       </div>
                     </div>
                     <h3 class="font-serif" style="font-size: ${baseSize * 1.75}px; color: ${textColor}; margin-bottom: 10px; font-weight: 700;">Claudiana Nery de Almeida Pimentel</h3>
@@ -1005,6 +1005,12 @@
       onConfigChange(window.elementSdk.config);
     } else {
       onConfigChange(defaultConfig);
+    }
+
+    // Set video starting time to 10 seconds
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo) {
+      heroVideo.currentTime = 10;
     }
 
     // Word by word reveal animation
