@@ -417,6 +417,27 @@
     .whatsapp-float {
       animation: pulse 2s infinite;
     }
+    
+    /* Menu Flutuante com Blur e Morphing */
+    #main-nav {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    #main-nav.scrolled {
+      background-color: rgba(255, 255, 255, 0.88) !important;
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    #main-nav .nav-container {
+      transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    #main-nav.scrolled .nav-container {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -552,8 +573,8 @@
       
       app.innerHTML = `
         <!-- Navigation -->
-        <nav style="background-color: ${backgroundColor}; box-shadow: 0 2px 12px rgba(0,0,0,0.08);" class="sticky top-0 z-50">
-          <div class="max-w-7xl mx-auto px-6 py-3">
+        <nav id="main-nav" style="background-color: ${backgroundColor}; box-shadow: 0 2px 12px rgba(0,0,0,0.08);" class="sticky top-0 z-50">
+          <div class="nav-container max-w-7xl mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
               <div style="width: 300px; height: 95px;">
                 <div class="logo-placeholder">
@@ -1050,6 +1071,21 @@
       setTimeout(() => ripple.remove(), 600);
     }
     
+    // Menu flutuante com blur e morphing
+    function handleNavbarMorphing() {
+      const nav = document.getElementById('main-nav');
+      if (!nav) return;
+      
+      const appContainer = document.getElementById('app');
+      const scrollY = appContainer ? appContainer.scrollTop : 0;
+      
+      if (scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    
     // Attach ripple function to all micro buttons
     document.addEventListener('DOMContentLoaded', () => {
       animateHeroTitle();
@@ -1060,6 +1096,15 @@
           btn.dataset.rippleBound = 'true';
         }
       });
+      
+      // Iniciar morphing do menu
+      setTimeout(() => {
+        const appContainer = document.getElementById('app');
+        if (appContainer) {
+          appContainer.addEventListener('scroll', handleNavbarMorphing, { passive: true });
+          handleNavbarMorphing();
+        }
+      }, 100);
     });
   </script>
 
