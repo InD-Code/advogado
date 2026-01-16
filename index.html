@@ -435,8 +435,36 @@
     }
     
     #main-nav.scrolled .nav-container {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+    }
+    
+    /* Form Message Styles */
+    .form-message {
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 6px;
+      display: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    .form-success {
+      background-color: rgba(76, 175, 80, 0.9);
+      color: white;
+      border: 1px solid #4CAF50;
+    }
+    
+    .form-error {
+      background-color: rgba(244, 67, 54, 0.9);
+      color: white;
+      border: 1px solid #F44336;
+    }
+    
+    .form-info {
+      background-color: rgba(33, 150, 243, 0.9);
+      color: white;
+      border: 1px solid #2196F3;
     }
   </style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -783,10 +811,8 @@
                   <div style="background: linear-gradient(145deg, #3a2d26 0%, #2c221d 100%); border: 1px solid rgba(203, 104, 45, 0.35); border-radius: 12px; padding: 28px 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.2); text-align: center;">
                     <div style="margin-bottom: 14px; display: flex; justify-content: center;"><svg width="48" height="48" fill="${primaryColor}" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
                     <h3 style="font-size: ${baseSize * 1.05}px; color: white; margin-bottom: 10px; font-weight: 700;">Telefone</h3>
-                    <p style="font-size: ${baseSize * 0.95}px; color: rgba(255, 255, 255, 0.82); line-height: 1.5;"> (81) 99983-9506 
-                      </p>
-                      <p style="font-size: ${baseSize * 0.95}px; color: rgba(255, 255, 255, 0.82); line-height: 1.5;"> 
-                      (81) 99227-9375</p>
+                    <p style="font-size: ${baseSize * 0.95}px; color: rgba(255, 255, 255, 0.82); line-height: 1.5;"> (81) 99983-9506</p>
+                    <p style="font-size: ${baseSize * 0.95}px; color: rgba(255, 255, 255, 0.82); line-height: 1.5;">(81) 99227-9375</p>
                   </div>
                   <div style="background: linear-gradient(145deg, #3a2d26 0%, #2c221d 100%); border: 1px solid rgba(203, 104, 45, 0.35); border-radius: 12px; padding: 28px 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.2); text-align: center;">
                     <div style="margin-bottom: 14px; display: flex; justify-content: center;"><svg width="48" height="48" fill="${primaryColor}" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
@@ -816,11 +842,16 @@
 
                 <div style="background: linear-gradient(145deg, #3a2d26 0%, #2c221d 100%); border: 1px solid rgba(203, 104, 45, 0.35); border-radius: 12px; padding: 26px 24px; box-shadow: 0 12px 32px rgba(0,0,0,0.2);">
                   <h3 style="font-size: ${baseSize * 1.05}px; color: white; margin-bottom: 14px; font-weight: 700;">Envie uma Mensagem</h3>
-                  <form class="flex flex-col gap-3">
-                    <input type="text" placeholder="Seu nome" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
-                    <input type="email" placeholder="Seu e-mail" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
-                    <textarea rows="4" placeholder="Sua mensagem" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px; resize: vertical;"></textarea>
-                    <button type="button" class="micro-btn shine-effect" style="margin-top: 4px; background: linear-gradient(135deg, ${primaryColor} 0%, #a85424 100%); color: white; font-weight: 700; letter-spacing: 0.4px; padding: 12px 18px; border-radius: 6px; border: none; font-size: ${baseSize}px; cursor: pointer; box-shadow: 0 10px 24px rgba(203, 104, 45, 0.35); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 14px 28px rgba(203, 104, 45, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 24px rgba(203, 104, 45, 0.35)'" onclick="createRipple(event)">Enviar Mensagem</button>
+                  <form id="contact-form" class="flex flex-col gap-3" onsubmit="return sendEmail(event)">
+                    <input type="text" id="name" name="name" placeholder="Seu nome" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
+                    <input type="email" id="email" name="email" placeholder="Seu e-mail" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
+                    <input type="tel" id="phone" name="phone" placeholder="Seu telefone (opcional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px;">
+                    <textarea rows="4" id="message" name="message" placeholder="Sua mensagem" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 14px; color: white; font-size: ${baseSize * 0.95}px; resize: vertical;"></textarea>
+                    <button type="submit" class="micro-btn shine-effect" style="margin-top: 4px; background: linear-gradient(135deg, ${primaryColor} 0%, #a85424 100%); color: white; font-weight: 700; letter-spacing: 0.4px; padding: 12px 18px; border-radius: 6px; border: none; font-size: ${baseSize}px; cursor: pointer; box-shadow: 0 10px 24px rgba(203, 104, 45, 0.35); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 14px 28px rgba(203, 104, 45, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 24px rgba(203, 104, 45, 0.35)'" onclick="createRipple(event)">
+                      <span id="submit-text">Enviar Mensagem</span>
+                      <span id="loading-spinner" style="display: none;">Enviando...</span>
+                    </button>
+                    <div id="form-message" class="form-message" style="font-size: ${baseSize * 0.9}px;"></div>
                   </form>
                 </div>
               </div>
@@ -896,7 +927,7 @@
         <!-- WhatsApp Floating Button -->
         <a href="https://wa.me/5581999839506?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta." target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
           <svg width="32" height="32" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
         </a>
       `;
@@ -946,6 +977,159 @@
           observer.observe(el);
         });
       }, 100);
+    }
+
+    // Função para enviar email via mailto:
+    function sendEmail(event) {
+      event.preventDefault();
+      
+      // Obter valores do formulário
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      // Validação básica
+      if (!name || !email || !message) {
+        showFormMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
+        return false;
+      }
+      
+      // Validar email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showFormMessage('Por favor, insira um endereço de email válido.', 'error');
+        return false;
+      }
+      
+      // Mostrar estado de carregamento
+      const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+      const submitText = document.getElementById('submit-text');
+      const loadingSpinner = document.getElementById('loading-spinner');
+      
+      submitBtn.disabled = true;
+      submitText.style.display = 'none';
+      loadingSpinner.style.display = 'inline';
+      
+      // Construir o corpo do email
+      const subject = `Novo Contato do Site - ${name}`;
+      const body = `Olá, 
+
+Recebi uma nova mensagem através do site do escritório:
+
+**Nome:** ${name}
+**E-mail:** ${email}
+**Telefone:** ${phone || 'Não informado'}
+
+**Mensagem:**
+${message}
+
+---
+Esta mensagem foi enviada através do formulário de contato do site.
+Data: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR')}`;
+      
+      // Codificar para URL
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(body);
+      
+      // Criar link mailto
+      const mailtoLink = `mailto:contato@aepjur.adv.br?subject=${encodedSubject}&body=${encodedBody}`;
+      
+      // Mostrar mensagem informativa
+      showFormMessage('Abrindo seu cliente de e-mail... Por favor, envie a mensagem que foi preenchida automaticamente.', 'info');
+      
+      // Abrir cliente de email após pequeno delay
+      setTimeout(() => {
+        window.open(mailtoLink, '_blank');
+        
+        // Resetar formulário após 2 segundos
+        setTimeout(() => {
+          document.getElementById('contact-form').reset();
+          submitBtn.disabled = false;
+          submitText.style.display = 'inline';
+          loadingSpinner.style.display = 'none';
+        }, 2000);
+      }, 500);
+      
+      return false;
+    }
+    
+    // Função para mostrar mensagens no formulário
+    function showFormMessage(message, type = 'info') {
+      const formMessage = document.getElementById('form-message');
+      
+      formMessage.textContent = message;
+      formMessage.className = 'form-message';
+      
+      if (type === 'success') {
+        formMessage.classList.add('form-success');
+      } else if (type === 'error') {
+        formMessage.classList.add('form-error');
+      } else {
+        formMessage.classList.add('form-info');
+      }
+      
+      formMessage.style.display = 'block';
+      
+      // Rolagem suave para a mensagem
+      formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      // Ocultar mensagem após 8 segundos
+      setTimeout(() => {
+        formMessage.style.display = 'none';
+      }, 8000);
+    }
+    
+    // Button Ripple Effect
+    function createRipple(event) {
+      const button = event.currentTarget;
+      const ripple = document.createElement('span');
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = event.clientX - rect.left - size / 2;
+      const y = event.clientY - rect.top - size / 2;
+      
+      ripple.classList.add('ripple');
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      
+      button.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
+    }
+    
+    // Menu flutuante com blur e morphing
+    function handleNavbarMorphing() {
+      const nav = document.getElementById('main-nav');
+      if (!nav) return;
+      
+      const appContainer = document.getElementById('app');
+      const scrollY = appContainer ? appContainer.scrollTop : 0;
+      
+      if (scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    
+    // Word by word reveal animation
+    function animateHeroTitle() {
+      const heroTitle = document.getElementById('hero-title');
+      if (!heroTitle) return;
+
+      const text = heroTitle.textContent.trim();
+      const words = text.split(/\s+/);
+      heroTitle.innerHTML = '';
+
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'word-reveal';
+        span.style.animationDelay = `${index * 0.15}s`;
+        span.textContent = word + ' ';
+        heroTitle.appendChild(span);
+      });
     }
 
     if (window.elementSdk) {
@@ -1023,66 +1207,15 @@
     }
 
     // Set video starting time to 10 seconds
-    const heroVideo = document.getElementById('hero-video');
-    if (heroVideo) {
-      heroVideo.currentTime = 10;
-    }
-
-    // Word by word reveal animation
-    function animateHeroTitle() {
-      const heroTitle = document.getElementById('hero-title');
-      if (!heroTitle) return;
-
-      const text = heroTitle.textContent.trim();
-      const words = text.split(/\s+/);
-      heroTitle.innerHTML = '';
-
-      words.forEach((word, index) => {
-        const span = document.createElement('span');
-        span.className = 'word-reveal';
-        span.style.animationDelay = `${index * 0.15}s`;
-        span.textContent = word + ' ';
-        heroTitle.appendChild(span);
-      });
-    }
-    
-    // Button Ripple Effect
-    function createRipple(event) {
-      const button = event.currentTarget;
-      const ripple = document.createElement('span');
-      const rect = button.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = event.clientX - rect.left - size / 2;
-      const y = event.clientY - rect.top - size / 2;
-      
-      ripple.classList.add('ripple');
-      ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = x + 'px';
-      ripple.style.top = y + 'px';
-      
-      button.appendChild(ripple);
-      
-      setTimeout(() => ripple.remove(), 600);
-    }
-    
-    // Menu flutuante com blur e morphing
-    function handleNavbarMorphing() {
-      const nav = document.getElementById('main-nav');
-      if (!nav) return;
-      
-      const appContainer = document.getElementById('app');
-      const scrollY = appContainer ? appContainer.scrollTop : 0;
-      
-      if (scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    }
-    
-    // Attach ripple function to all micro buttons
     document.addEventListener('DOMContentLoaded', () => {
+      const heroVideo = document.getElementById('hero-video');
+      if (heroVideo) {
+        heroVideo.currentTime = 10;
+      }
+      
       animateHeroTitle();
+      
+      // Attach ripple function to all micro buttons
       const buttons = document.querySelectorAll('.micro-btn');
       buttons.forEach(btn => {
         if (!btn.dataset.rippleBound) {
@@ -1101,6 +1234,5 @@
       }, 100);
     });
   </script>
-
 </body>
 </html>
